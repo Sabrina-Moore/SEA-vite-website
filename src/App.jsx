@@ -5,8 +5,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
+
 import './App.css'
 import DataCard from './DataCard.jsx'
+import ducks from './array.json'
+
 // import characters from './protagonists.json'
 
 import { styled } from '@mui/material/styles';
@@ -25,7 +28,9 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+
 function App() {
+  console.log("My data:", ducks);
   return (
     <>
       <Container>
@@ -51,53 +56,23 @@ function App() {
       <Container maxWidth="sm"  sx={{
          py: 4,
          justifyContent: "center"
-         
          }} >
         <Grid container 
           spacing={4} 
           columns={4}
           columnspacing={{ xs: 1, sm: 2, md: 3}} 
           >
-          <Grid item size={2}>
+          {ducks.map((ducks, index) => (
+          <Grid size={2} key= {index} >
             <DataCard
-            title="Duck"
-            imageURL={"https://www.allaboutbirds.org/guide/assets/photo/308743931-480px.jpg"} 
-            text={[
-              "A duck about to do mayhem."
-            ]}
+            title={ducks.title}
+            imageURL={ducks.imageURL} 
+            text={ducks.text}
             />
           </Grid>
-        
-          <Grid item size={2}>
-            <DataCard
-            title="Duck"
-            imageURL={"https://s7d1.scene7.com/is/image/isp/wabruddyduckmale-mkr?qlt=100&wid=1200&ts=1759251643047&$ImageComponent$&fit=constrain"} 
-            text={[
-              "A duck about to do mayhem."
-            ]}
-            />
-          </Grid>
-        
-          <Grid item size={2}>
-            <DataCard
-            title="Duck"
-            imageURL={"https://media.audubon.org/nas_birdapi_hero/h_ring-necked-duck_004_spring_california_beckymatsubara_flickrcc-by-2.0_breeding-adult-male.jpg?height=944&auto=webp&quality=90&fit=bounds&disable=upscale"} 
-            text={[
-              "A duck about to do mayhem."
-            ]}
-            />
-          </Grid>
-
-           <Grid item size={2}>
-            <DataCard
-            title="Duck"
-            imageURL={"https://www.marylandzoo.org/wp-content/uploads/2017/11/woodduck2-1024x683.jpg"} 
-            text={[
-              "A duck about to do mayhem."
-            ]}
-            />
-          </Grid>
+         ))}
         </Grid>
+         
       </Container>
     </>
   )
