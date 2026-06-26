@@ -14,8 +14,8 @@ import CardActionArea from '@mui/material/CardActionArea';
 //modal
 import Modal from '@mui/material/Modal';
 
-
-export default function DataCard({ title, imageURL, text }) {
+//properties are what we're bringing into the function
+export default function DataCard({name, imageURL, text}) {
   
   const [counter, setCounter] = useState(0);
 
@@ -33,7 +33,7 @@ export default function DataCard({ title, imageURL, text }) {
 
   return (
     <Card >
-      <Typography align='center'> {title}</Typography>
+      <Typography align='center'> {name}</Typography>
       <CardMedia component="img" height="200px" image={imageURL} sx={{ objectFit:"cover"}}/>
       <CardContent sx={{ pt: 0 }} >
         <Typography align='center'> {text}</Typography>

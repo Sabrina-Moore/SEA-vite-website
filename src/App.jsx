@@ -7,7 +7,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 
-import Modal from '@mui/material/Modal';
 
 //button 
 import Button from "@mui/material/Button";
@@ -20,6 +19,9 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+
+//search bar
+import TextField from '@mui/material/TextField';
 
 //sidebar
 /*
@@ -60,32 +62,34 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function App() {
 
+  //for non-working drawer
    /*const [animal, setAnimal] = useState('ducks');
    const [open, setOpen] = React.useState(false);
    const currentAnimal = animal === 'ducks' ? ducks : geese;*/
 
+   //states for modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  //states for searchBar
+  const [search, setSearch] = useState("");
+
+  console.log(search);
+
+  function handleInput(event){
+    setSearch(event.target.value);
+  }
+
+//search filter
+    const filteredDucks = ducks.filter((duck) => 
+      duck.name.toLowerCase().includes(search.toLowerCase())
+);
+//optional: also filter for text keywords
+
+
   return (
     <>
-    <Button onClick={handleOpen}>Open modal</Button>
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Text in a modal
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-        </Typography>
-      </Box>
-    </Modal>
       <Container>
         <Typography
           variant="h2"
@@ -108,6 +112,21 @@ function App() {
         </Typography>
       </Container>
 
+      {/*Text field for search bar display */}
+      <Container sx={{ display: "flex", justifyContent: "center", mt: 4, }}
+      >
+          <TextField 
+            
+            label="Search by name" 
+            variant="outlined" 
+            sx={{width: 400}} 
+            value={search}
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+              />
+        </Container>
+
       <Container maxWidth="sm"  sx={{
          py: 4,
          justifyContent: "center"
@@ -117,10 +136,11 @@ function App() {
           columns={4}
           columnspacing={{ xs: 1, sm: 2, md: 3}} 
           >
-          {ducks.map((ducks, index) => (
+            {/*Populating DataCard with array*/}
+          {filteredDucks.map((ducks, index) => ( 
           <Grid size={2} key= {index} >
             <DataCard
-            title={ducks.title}
+            name={ducks.name}
             imageURL={ducks.imageURL} 
             text={ducks.text}
             />
