@@ -1,4 +1,5 @@
-import Button from "@mui/material/Button";
+//cards and containers
+import * as React from 'react';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Card from '@mui/material/Card';
@@ -6,16 +7,46 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 
-import './App.css'
-import DataCard from './DataCard.jsx'
-import ducks from './array.json'
 
-// import characters from './protagonists.json'
+//button 
+import Button from "@mui/material/Button";
 
+//use state
+import { useState } from 'react';
+
+//grid
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+
+//search bar
+import TextField from '@mui/material/TextField';
+
+//sidebar
+/*
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';*/
+
+
+
+
+//project files
+import './App.css'
+import DataCard from './DataCard.jsx'
+import ducks from './duckArray.json'
+import geese from './geeseArray.json'
+//import NavBar from './navBar.jsx'
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -30,7 +61,33 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 function App() {
-  console.log("My data:", ducks);
+
+  //for non-working drawer
+   /*const [animal, setAnimal] = useState('ducks');
+   const [open, setOpen] = React.useState(false);
+   const currentAnimal = animal === 'ducks' ? ducks : geese;*/
+
+   //states for modal
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  //states for searchBar
+  const [search, setSearch] = useState("");
+
+  console.log(search);
+
+  function handleInput(event){
+    setSearch(event.target.value);
+  }
+
+//search filter
+    const filteredDucks = ducks.filter((duck) => 
+      duck.name.toLowerCase().includes(search.toLowerCase())
+);
+//optional: also filter for text keywords
+
+
   return (
     <>
       <Container>
@@ -39,8 +96,7 @@ function App() {
           align="center"
           color="text.primary"
           sx={{ py: 2 }}
-        >
-          Ducks
+        > Ducks
         </Typography>
 
         <Typography
@@ -50,8 +106,26 @@ function App() {
           sx={{ mx: 10 }}
         >
           A collection of ducks, thirsting for mayhem.
+          {/*{animal === 'ducks'
+          ? 'A collection of ducks, thirsting for mayhem.'
+         : 'A collection of geese, specialized in combat.'}*/}
         </Typography>
       </Container>
+
+      {/*Text field for search bar display */}
+      <Container sx={{ display: "flex", justifyContent: "center", mt: 4, }}
+      >
+          <TextField 
+            
+            label="Search by name" 
+            variant="outlined" 
+            sx={{width: 400}} 
+            value={search}
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+              />
+        </Container>
 
       <Container maxWidth="sm"  sx={{
          py: 4,
@@ -62,17 +136,17 @@ function App() {
           columns={4}
           columnspacing={{ xs: 1, sm: 2, md: 3}} 
           >
-          {ducks.map((ducks, index) => (
+            {/*Populating DataCard with array*/}
+          {filteredDucks.map((ducks, index) => ( 
           <Grid size={2} key= {index} >
             <DataCard
-            title={ducks.title}
+            name={ducks.name}
             imageURL={ducks.imageURL} 
             text={ducks.text}
             />
           </Grid>
          ))}
         </Grid>
-         
       </Container>
     </>
   )
@@ -82,33 +156,3 @@ function App() {
 
 export default App;
 
-{/*       <Item><Card sx={{ maxWidth: 345 }}> 
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://www.allaboutbirds.org/guide/assets/photo/65533521-480px.jpg"
-          alt="Duck 1"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Duck
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Quack!
-          </Typography>
-        </CardContent>
-      <CardActionArea>
-        <cardActions>
-          <Button 
-          variant="contained"
-          color="error"
-          // I'm trying to use custom CSS defined in the file App.css,
-          // but it isn't working. Why, and how can I fix it?
-          className="characterButton"
-        >
-          Choose mayhem
-        </Button>
-        </cardActions>
-      </CardActionArea>
-        
-    </Card> */}

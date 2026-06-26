@@ -1,0 +1,22 @@
+[
+    {
+    "name": "American Black Duck",
+    "imageURL": "https://www.allaboutbirds.org/guide/assets/photo/308743931-480px.jpg",
+    "text": ["A duck about to do mayhem."]
+  },
+  {
+    "name": "Muscovy Duck",
+    "imageURL": "https://heritagepoultryfarm.com/wp-content/uploads/2025/11/Depositphotos_61747619_L_1248x.webp",
+    "text": ["A duck about to do mayhem."]
+  },
+  {
+    "name": "Tufted Duck",
+    "imageURL": "https://media.audubon.org/nas_birdapi_hero/h_ring-necked-duck_004_spring_california_beckymatsubara_flickrcc-by-2.0_breeding-adult-male.jpg?height=944&auto=webp&quality=90&fit=bounds&disable=upscale",
+    "text": ["A duck, serene, yet dangerous."]
+  },
+  {
+    "name": "Mallard Duck",
+    "imageURL": "https://i.natgeofe.com/k/7ce14b7f-df35-4881-95ae-650bce0adf4d/mallard-male-standing.jpg?wp=1&w=1084.125&h=609",
+    "text": ["A duck about to do mayhem."]
+  }
+]
